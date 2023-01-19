@@ -11,10 +11,10 @@
   </body>
   <script src="./jquery-1.12.4.js"></script>
   <script>
-    	$(document).ready(function() {
-    				autoPlayMusic();
-    				audioAutoPlay();
-    			});
+     window.onload=function(){
+      autoPlayMusic();
+      audioAutoPlay();
+    }
     
     			function audioAutoPlay() {
     				var audio = document.getElementById('bg-music');
