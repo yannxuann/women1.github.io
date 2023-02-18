@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+		
+			body {
+				background-color: #fff;
+				padding: 20px;
+			}
+		
+			h5 {
+				text-align: center;
+				font-weight: 700;
+			}
+		
+			form {
+				margin-top: 50px;
+			}
+		
+			form label {
+				font-size: 14px;
+				word-wrap: break-word;
+				white-space: nowrap;
+				margin-right: 1em;
+				margin-bottom: 0;
+			}
+		
+			form label::before {
+				content: '*';
+				font-size: 14px;
+				color: red;
+			}
+		
+			.form-control {
+				/* font-size: 0.8rem; */
+			}
+		
+			.form-group {
+				align-items: center;
+				margin-bottom: 25px;
+			}
+		
+			button {
+				margin-bottom: 25px;
+			}
+		
+			.text {
+				font-weight: 700;
+				font-size: 14px;
+			}
+		
+			.text h6 {
+				font-weight: 700;
+				font-size: 1.2rem;
+				margin-bottom: 30px;
+			}
+		
+			.invalid-feedback {
+				margin-left: 90px;
+			}
+		
+			.invalid-input {
+				color: red;
+				border: 1px solid red;
+			}
+		
+			input::-webkit-input-placeholder {
+				font-size: 14px;
+			}
+		
+			.invalid-input::-webkit-input-placeholder {
+				color: red;
+			}
+		
+			.invalid-input::input-placeholder {
+				color: red;
+			}
+		
+			.invalid-input::-moz-placeholder {
+				color: red;
+			}
+		.modal{
+			width: 80%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+			.modal-dialog {
+				margin: 0;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%) !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h5>充值</h5>
+		<form class="needs-validation" novalidate>
+			<div class="form-group d-flex ">
+				<label for="code">充值激活码</label>
+				<input type="text" class="form-control" id="code" aria-describedby="emailHelp" placeholder="填写购买激活码" >
+			</div>
+			<div class="form-group">
+				<div class=" d-flex " style="align-items: center;">
+					<label for="phone">充值手机号</label>
+					<input type="phone" class="form-control " id="phone" placeholder="请输入开通会员手机号">
+				</div>
+				<div class="invalid-feedback invalid-phone">
+					请输入正确的手机号码
+				</div>
+			</div>
+
+			<div class="show">
+				<button class="btn btn-primary col-12 phone-code" data-target="#exampleModal">获取验证码</button>
+				<div class="form-group">
+					<div class="d-flex" style="align-items: center;">
+						<label for="re-code" style="margin-right: 3em;">验证码</label>
+						<input type="text" class="form-control" id="re-code" placeholder="请输入验证码" >
+					</div>
+					<div class="invalid-feedback invalid-code">
+						验证码不能为空
+					</div>
+				</div>
+
+			</div>
+		</form>
+
+		<button class="btn btn-primary col-12 submit">确定充值</button>
+
+		<div class="text">
+			<h6>活动说明：</h6>
+			<p>1.充值时请谨慎填写手机号，如有填错自行承担。</p>
+			<p>2.确认充值后立马到账。</p>
+			<p>3.充值成功后，请去对应开通平台APP进行查询有效期。</p>
+			<p>4.本活动由第三方合作提供，如遇问题，请联系客服处理</p>
+		</div>
+		<!-- 	<button type="button" class="btn btn-primary">
+		  Launch demo modal
+		</button> -->
+		<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+		 		<div class="modal-header">
+		 			<h5 class="modal-title" id="exampleModalLabel">提示</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+	<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+	</script>
+	<script>
+		
+		// 禁用所有按钮
+		var buttons = document.getElementsByTagName('button');
+		for (var i = 0; i < buttons.length; i++) {
+		  buttons[i].disabled = true;
+		}
+		var inputs = document.getElementsByTagName('input');
+		for (var i = 0; i < inputs.length; i++) {
+		  inputs[i].disabled = true;
+		}
+		
+		// 启用所有按钮和输入框
+		window.onload=function(){
+			  var buttons = document.getElementsByTagName('button');
+			  for (var i = 0; i < buttons.length; i++) {
+			    buttons[i].disabled = false;
+			  }
+			var inputs = document.getElementsByTagName('input');
+			for (var i = 0; i < inputs.length; i++) {
+			  inputs[i].disabled = false;
+			}
+		}
+	
+		
+		var query = decodeURI(window.location.search.substring(1));
+		var key = query.split("&")[0].split('=');
+		var keyCode = ''
+		if (key[0] == 'key') {
+			keyCode = key[1]
+		}
+		var code = document.getElementById('code')
+		code.value = keyCode
+		var reCode = document.getElementById('re-code')
+		document.querySelector('.phone-code').onclick = function() {
+			isEmty()
+
+		}
+		document.querySelector('.submit').onclick = function() {
+			isEmty()
+			if (reCode.value == '') {
+				reCode.classList.add('invalid-input')
+				document.querySelector('.invalid-code').style.display = 'block'
+			} else {
+				reCode.classList.remove('invalid-input')
+				document.querySelector('.invalid-code').style.display = 'none'
+				if (!isEmty()) {
+					submitData(phone.value, reCode.value)
+				}
+			}
+		
+		}
+		
+		function getData(data){
+		
+			var title = document.querySelector('h5')
+			title.innerHTML = data.msg
+			document.title = data.msg
+			var submit = document.querySelector('.submit')
+			console.log(data)
+			var code = document.getElementById('code')
+			var reCode = document.getElementById('re-code')
+			var phone = document.getElementById('phone')
+			var flag = false
+			code.value = keyCode
+			// 1.display=='false'隐藏验证码
+			if (data.display && data.display == 'false') {
+				
+				document.querySelector('.show').style.display = 'none'
+				submit.onclick = function() {
+					
+					flag = false
+					if (!isEmty()) {
+						submitData(phone.value, reCode.value)
+						
+					}
+					if (!flag) {
+						console.log(flag);
+						return
+					}
+				}
+			} else {
+				// 不隐藏
+				document.querySelector('.phone-code').onclick = function() {
+					flag = false
+					isEmty()
+					if (!isEmty()) {
+						getCode(phone.value)
+					}
+					if (!flag) {
+						console.log(flag);
+						return
+					}
+				}
+				submit.onclick = function() {
+					flag = false
+					isEmty()
+					if (reCode.value == '') {
+						reCode.classList.add('invalid-input')
+						document.querySelector('.invalid-code').style.display = 'block'
+					} else {
+						reCode.classList.remove('invalid-input')
+						document.querySelector('.invalid-code').style.display = 'none'
+						if (!isEmty()) {
+							submitData(phone.value, reCode.value)
+						}
+					}
+					if (!flag) {
+						console.log(flag);
+						return
+					}
+				}
+			}
+			if (data.state == '成功') {
+				$('#code')[0].disabled=true
+				
+			}else{
+				$('#code')[0].disabled=false
+			}
+		}
+		$.ajax({
+			url: "http://120.46.142.117:8888/api/mgty/form/getConfig",
+			dataType: "json",
+			type: "post",
+			async: "true",
+			data: {
+				activation: keyCode,
+				mobile: "",
+				verification: ""
+			},
+			success: function(data) {
+				getData(data)
+			},
+			error: function(err) {
+				$('.modal-body').text('获取数据失败，请联系客服')
+				$('#exampleModal').modal('show')
+			}
+		});
+		(function() {
+			'use strict';
+			window.addEventListener('load', function() {
+				var forms = document.getElementsByClassName('needs-validation');
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+					}, false);
+				});
+			}, false);
+		})();
+
+		function isEmty() {
+			var phone = document.getElementById('phone')
+			if (phone.value == '' || phone.value.length != 11) {
+				phone.classList.add('invalid-input')
+				document.querySelector('.invalid-phone').style.display = 'block'
+				return true
+			} else {
+				phone.classList.remove('invalid-input')
+				document.querySelector('.invalid-phone').style.display = 'none'
+				return false
+			}
+		}
+
+		function getCode(phone, code) {
+			$.ajax({
+				url: "http://120.46.142.117:8888/api/mgty/form/getverification",
+				dataType: "json",
+				type: "post",
+				async: "true",
+				data: {
+					activation: keyCode,
+					mobile: phone,
+					verification: code ? code : ''
+				},
+				success: function(res) {
+					flag = true
+					if (res.state == '成功') {
+						$('.modal-body').text('充值成功')
+						$('#exampleModal').modal('show')
+					} else {
+						$('.modal-body').text(res.msg)
+						$('#exampleModal').modal('show')
+						// data-toggle="modal"
+					}
+				},
+				error: function(err) {
+					$('.modal-body').text('获取数据失败，请联系客服')
+					$('#exampleModal').modal('show')
+				}
+			})
+		}
+
+		function submitData(phone, code) {
+
+			$.ajax({
+				url: "http://120.46.142.117:8888/api/mgty/form/recharge",
+				dataType: "json",
+				type: "post",
+				async: "true",
+				data: {
+					activation: keyCode,
+					mobile: phone,
+					verification: code ? code : ''
+				},
+				success: function(res) {
+					flag = true
+					if (res.state == '成功') {
+						$('.modal-body').text('充值成功')
+						$('#exampleModal').modal('show')
+
+					} else {
+						$('.modal-body').text(res.msg)
+						$('#exampleModal').modal('show')
+					}
+				},
+				error: function(err) {
+					$('.modal-body').text('获取数据失败，请联系客服')
+					$('#exampleModal').modal('show')
+				}
+			})
+		}
+	</script>
+
+</html>
